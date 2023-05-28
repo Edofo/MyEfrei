@@ -1,0 +1,13 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+
+    ul {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+    }
+}

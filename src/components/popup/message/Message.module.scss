@@ -1,0 +1,24 @@
+.popupMessage {
+    display: flex;
+    align-items: center;
+
+    position: fixed;
+    top: 5%;
+    left: 10px;
+
+    background-color: var(--color-white);
+    padding: 10px 20px;
+    border-radius: 4px;
+
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-110%);
+    will-change: transform;
+
+    &.show {
+        transform: translateX(0);
+    }
+
+    i {
+        margin-right: 10px;
+    }
+}

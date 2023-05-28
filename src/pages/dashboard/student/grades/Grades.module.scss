@@ -1,0 +1,49 @@
+.grades {
+    .info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 15px 0;
+    }
+
+    .moreInfo {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 10px;
+        color: var(--color-white);
+        background-color: var(--color-primary);
+        border-radius: 7px;
+        margin-bottom: 10px;
+
+        &:hover {
+            background-color: var(--color-primary-light);
+        }
+    }
+
+    .message {
+        padding: 0 10px;
+        border: 1px solid var(--color-primary);
+        border-radius: 7px;
+        height: 0px;
+        overflow: hidden;
+        visibility: hidden;
+
+        transition-duration: 0.5s;
+        transition-timing-function: ease;
+
+        &.show {
+            padding: 10px;
+            visibility: visible;
+        }
+    }
+
+    .table {
+        margin-top: 10px;
+
+        .tableTitle {
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+    }
+}

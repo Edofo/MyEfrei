@@ -1,0 +1,39 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+
+    label {
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+
+    input {
+        border: 1px solid var(--color-primary);
+        border-radius: 4px;
+        padding: 8px;
+        background-color: var(--color-white);
+        color: var(--color-black);
+
+        &::-webkit-input-placeholder {
+            color: var(--color-gray);
+        }
+
+        &::-moz-placeholder {
+            color: var(--color-gray);
+        }
+
+        &:-ms-input-placeholder {
+            color: var(--color-gray);
+        }
+
+        &::-ms-input-placeholder {
+            color: var(--color-gray);
+        }
+
+        &::placeholder {
+            color: var(--color-gray);
+        }
+    }
+}

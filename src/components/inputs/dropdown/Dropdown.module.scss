@@ -1,0 +1,35 @@
+.dropdown {
+    position: relative;
+
+    .dropdownButton {
+        cursor: pointer;
+    }
+
+    ul {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        left: -50%;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 100%;
+        z-index: 2;
+        padding: 5px;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+
+        li {
+            cursor: pointer;
+            font-size: 16px;
+
+            padding: 5px 15px;
+
+            &:hover {
+                background-color: #eee;
+            }
+        }
+    }
+}
