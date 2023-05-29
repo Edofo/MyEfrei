@@ -60,7 +60,7 @@ const Grades = () => {
             </p>
 
             <Table head={head} className={styles.table}>
-                {grades?.data?.gradesForStudent?.map((module, index) => {
+                {grades?.data?.gradesForStudent?.map((module: any, index: number) => {
                     return (
                         <Fragment key={index + "t1"}>
                             <tr key={index + "t1"} className={styles.tableTitle}>
@@ -70,7 +70,7 @@ const Grades = () => {
                                 <td></td>
                                 <td className="tableCenter">{module?.moyenne}</td>
                             </tr>
-                            {module?.subjects?.map((subject, index2) => {
+                            {module?.subjects?.map((subject: any, index2: number) => {
                                 return (
                                     <Fragment key={index2 + "t2"}>
                                         <tr className="tableColor">
@@ -82,7 +82,7 @@ const Grades = () => {
                                             <td className="tableCenter">ok</td>
                                             <td className="tableCenter">{subject.moyenne}</td>
                                         </tr>
-                                        {subject?.grades?.map((grade, index3) => {
+                                        {subject?.grades?.map((grade: any, index3: number) => {
                                             return (
                                                 <tr key={index3 + "t3"}>
                                                     <td colSpan={2}></td>
