@@ -2,38 +2,15 @@ import { Fragment, useState } from "react";
 import styles from "./Grades.module.scss";
 
 import { Table } from "@/components";
+
 import useGetAllGradesForStudent from "@/api/student/grades/GetAllGradesForStudent";
 
 const Grades = () => {
     const head = ["UE", "Module", "Type", "Coef", "Moyenne/Résultat"];
 
-    const body = [
-        {
-            ue: "UE - Concevoir et développer des composants d'interface utilisateur - (ECTS --- / 3)",
-            moyenne: "---",
-            modules: [
-                {
-                    name: "ReactJS",
-                    teacher: "Edofo",
-                    moyenne: "---",
-                    coef: 1,
-                    grades: [
-                        {
-                            name: "CTD",
-                            coef: 1,
-                            grade: "---",
-                        },
-                    ],
-                },
-            ],
-        },
-    ];
-
     const [displayMessage, setDisplayMessage] = useState(false);
 
-    const test = useGetAllGradesForStudent();
-
-    console.log(test);
+    const { data: grades } = useGetAllGradesForStudent();
 
     const handleDisplayMessage = () => {
         setDisplayMessage(!displayMessage);
@@ -83,34 +60,35 @@ const Grades = () => {
             </p>
 
             <Table head={head} className={styles.table}>
-                {body?.map((item, index) => {
+                {grades?.data?.gradesForStudent?.map((module, index) => {
                     return (
                         <Fragment key={index + "t1"}>
                             <tr key={index + "t1"} className={styles.tableTitle}>
-                                <td colSpan={2}>{item.ue}</td>
+                                <td className="tableCenter">UE</td>
+                                <td>{module?.module}</td>
                                 <td></td>
                                 <td></td>
-                                <td className="tableCenter">{item.moyenne}</td>
+                                <td className="tableCenter">{module?.moyenne}</td>
                             </tr>
-                            {item?.modules?.map((module, index2) => {
+                            {module?.subjects?.map((subject, index2) => {
                                 return (
                                     <Fragment key={index2 + "t2"}>
                                         <tr className="tableColor">
                                             <td></td>
                                             <td>
-                                                <b>{module?.name}</b> - <span>{module.teacher}</span>
+                                                <b>{subject?.subject}</b> - <span>{subject.teacher}</span>
                                             </td>
                                             <td></td>
-                                            <td className="tableCenter">({module?.coef})</td>
-                                            <td className="tableCenter">{module?.moyenne}</td>
+                                            <td className="tableCenter">ok</td>
+                                            <td className="tableCenter">{subject.moyenne}</td>
                                         </tr>
-                                        {module?.grades?.map((grade, index3) => {
+                                        {subject?.grades?.map((grade, index3) => {
                                             return (
                                                 <tr key={index3 + "t3"}>
                                                     <td colSpan={2}></td>
-                                                    <td className="tableCenter">{grade?.name}</td>
+                                                    <td className="tableCenter">ok</td>
                                                     <td className="tableCenter">({grade?.coef})</td>
-                                                    <td className="tableCenter">{grade?.grade}</td>
+                                                    <td className="tableCenter">{grade?.value}</td>
                                                 </tr>
                                             );
                                         })}
