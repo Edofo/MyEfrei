@@ -4,7 +4,7 @@ import styles from "./Slider.module.scss";
 
 import { SliderProps } from "@/types/components/Slider";
 
-const Slider = ({ children }: SliderProps) => {
+const Slider = ({ children, className }: SliderProps) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [slide, setSlide] = useState(children[0] as JSX.Element);
 
@@ -33,7 +33,7 @@ const Slider = ({ children }: SliderProps) => {
     }, [currentSlide, children]);
 
     return (
-        <div className={styles.slider}>
+        <div className={`${styles.slider} ${className || ""}`}>
             {slide}
             <button className={styles.prev} onClick={prevSlide}>
                 &#10094;

@@ -58,7 +58,7 @@ const BrowserRouter = createBrowserRouter(
 );
 
 const App = () => {
-    const { popup, hidePopup } = usePopupContext();
+    const { popup } = usePopupContext();
     const { message } = useMessageContext();
 
     return (

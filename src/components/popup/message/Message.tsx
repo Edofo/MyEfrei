@@ -26,11 +26,34 @@ const Message = () => {
         }
     };
 
-    useEffect(() => {
-        if (message) {
-            const element = messageRef.current;
+    const color = () => {
+        switch (type) {
+            case MessageType.ERROR:
+                return styles.error;
+            case MessageType.SUCCESS:
+                return styles.success;
+            case MessageType.WARNING:
+                return styles.warning;
+            case MessageType.INFO:
+                return styles.info;
+            default:
+                return styles.error;
+        }
+    };
 
-            setTimeout(() => element?.classList.add(styles.show), 10);
+    useEffect(() => {
+        const element = messageRef.current;
+
+        if (message) {
+            if (!element) return;
+
+            element?.classList.remove(styles.animated);
+            element?.classList.remove(styles.show);
+
+            setTimeout(() => {
+                element?.classList.add(styles.animated);
+                element?.classList.add(styles.show);
+            }, 10);
 
             const timer = setTimeout(() => {
                 element?.classList.remove(styles.show);
@@ -42,7 +65,7 @@ const Message = () => {
     }, [message, hideMessage]);
 
     return (
-        <div ref={messageRef} className={styles.popupMessage}>
+        <div ref={messageRef} className={`${styles.popupMessage} ${color()}`}>
             {icon()}
             <p>{messageText}</p>
         </div>

@@ -2,6 +2,7 @@ export interface MessagePopup {
     isShow: boolean;
     message: string;
     type: MessageType;
+    updatedAt: Date;
 }
 
 export interface MessageContexType {

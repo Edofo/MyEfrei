@@ -26,7 +26,7 @@ const Planning = () => {
     };
 
     return (
-        <div className={styles.grades}>
+        <section className={styles.grades}>
             <h1>Mes notes et crédits</h1>
 
             <div className={styles.info}>
@@ -55,7 +55,7 @@ const Planning = () => {
                 </ul>
                 Les cours en présentiel sont dispensés sur les lieux suivants :
             </p>
-        </div>
+        </section>
     );
 };
 

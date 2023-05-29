@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import styles from "./Grades.module.scss";
 
 import { Table } from "@/components";
-import useGetAllGrades from "@/api/student/grades/GetAllGrades";
+import useGetAllGradesForStudent from "@/api/student/grades/GetAllGradesForStudent";
 
 const Grades = () => {
     const head = ["UE", "Module", "Type", "Coef", "Moyenne/Résultat"];
@@ -31,7 +31,7 @@ const Grades = () => {
 
     const [displayMessage, setDisplayMessage] = useState(false);
 
-    const test = useGetAllGrades();
+    const test = useGetAllGradesForStudent();
 
     console.log(test);
 
@@ -59,13 +59,13 @@ const Grades = () => {
         <div className={styles.grades}>
             <h1>Mes notes et crédits</h1>
 
-            <div className={styles.info}>
+            <section className={styles.info}>
                 <i className="fas fa-info-circle" />
                 <p>
                     Pour toute question relative à vos cours et notes, nous vous invitons à envoyer un mail à l'adresse
                     : <a href="mailto:scolarite@efrei.fr">scolarite@efrei.fr</a>.
                 </p>
-            </div>
+            </section>
 
             <button className={styles.moreInfo} onClick={handleDisplayMessage}>
                 <i className="fas fa-info-circle" />
@@ -85,7 +85,7 @@ const Grades = () => {
             <Table head={head} className={styles.table}>
                 {body?.map((item, index) => {
                     return (
-                        <>
+                        <Fragment key={index + "t1"}>
                             <tr key={index + "t1"} className={styles.tableTitle}>
                                 <td colSpan={2}>{item.ue}</td>
                                 <td></td>
@@ -94,8 +94,8 @@ const Grades = () => {
                             </tr>
                             {item?.modules?.map((module, index2) => {
                                 return (
-                                    <>
-                                        <tr key={index2 + "t2"} className="tableColor">
+                                    <Fragment key={index2 + "t2"}>
+                                        <tr className="tableColor">
                                             <td></td>
                                             <td>
                                                 <b>{module?.name}</b> - <span>{module.teacher}</span>
@@ -114,10 +114,10 @@ const Grades = () => {
                                                 </tr>
                                             );
                                         })}
-                                    </>
+                                    </Fragment>
                                 );
                             })}
-                        </>
+                        </Fragment>
                     );
                 })}
             </Table>

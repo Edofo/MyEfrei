@@ -41,9 +41,26 @@
     --color-background: #242424;
     --color-background-dark: #1b1b1b;
     --color-background-light: #2b2b2b;
+
+    --color-red: #f44336;
+    --color-red-dark: #ba000d;
+    --color-red-light: #ff7961;
+
+    --color-green: #4caf50;
+    --color-green-dark: #087f23;
+    --color-green-light: #80e27e;
+
+    --color-blue: #2196f3;
+    --color-blue-dark: #0069c0;
+    --color-blue-light: #64b5f6;
+
+    --color-yellow: #ffeb3b;
+    --color-yellow-dark: #f57f17;
+    --color-yellow-light: #ffee58;
 }
 
-body {
+body,
+#root {
     min-height: 100vh;
 }
 

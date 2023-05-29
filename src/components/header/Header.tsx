@@ -1,6 +1,10 @@
 import styles from "./Header.module.scss";
 
+import { useGetUserInfos } from "@/api/user/GetUserInfos";
+
 const Header = () => {
+    const { data: userInfos } = useGetUserInfos();
+
     return (
         <header className={styles.header}>
             <img
@@ -11,7 +15,7 @@ const Header = () => {
             <div>
                 <i className="fas fa-bell" />
                 <div className={styles.account}>
-                    <p>Nolan</p>
+                    <p>{userInfos?.data?.userInfos?.name}</p>
                     <i className="fas fa-user" />
                 </div>
             </div>

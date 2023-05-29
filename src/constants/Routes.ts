@@ -3,7 +3,9 @@ export const HOME = "/portal";
 
 export const STUDENT = "/portal/student";
 export const GRADES = "/portal/student/grades";
-export const PLANNING = "/portal/student/planning";
+
+export const CAMPUS = "/portal/campus";
+export const PLANNING = "/portal/campus/planning";
 
 // AUTH
 export const AUTH = "/auth";

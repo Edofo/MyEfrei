@@ -1,27 +1,37 @@
 import styles from "./Navbar.module.scss";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import * as Routes from "@/constants/Routes";
 
 import { InputList } from "@/components";
 
 const Navbar = () => {
+    const location = useLocation();
+
+    const isColor = (path: string) => {
+        if (path === Routes.HOME) {
+            return location.pathname === path ? styles.active : "";
+        }
+
+        return location.pathname.includes(path) ? styles.active : "";
+    };
+
     return (
         <nav className={styles.navbar}>
             <ul>
-                <li>
+                <li className={isColor(Routes.HOME)}>
                     <Link to={Routes.HOME}>Accueil</Link>
                 </li>
-                <li>
-                    <InputList.Dropdown value={<p>Scolarité</p>}>
+                <li className={isColor(Routes.STUDENT)}>
+                    <InputList.Dropdown value="Scolarité">
                         <Link to={Routes.GRADES}>
                             <i className="fad fa-clipboard-list" /> Consulter mes notes
                         </Link>
                     </InputList.Dropdown>
                 </li>
-                <li>
-                    <InputList.Dropdown value={<p>Campus</p>}>
+                <li className={isColor(Routes.CAMPUS)}>
+                    <InputList.Dropdown value="Campus">
                         <Link to={Routes.PLANNING}>
                             <i className="fad fa-calendar-alt" /> Consulter mon planning
                         </Link>

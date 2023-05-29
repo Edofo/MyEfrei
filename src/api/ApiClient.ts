@@ -11,10 +11,15 @@ const ApiClient = axios.create({
 ApiClient.interceptors.request.use(
     (config) => {
         // Do something before request is sent
+        // get token from cookie
+        const token = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith(import.meta.env.VITE_COOKIE_NAME as string))
+            ?.split("=")[1];
 
-        // if (token) {
-        //     config.headers["Authorization"] = `Bearer ${token}`;
-        // }
+        if (token) {
+            config.headers["Authorization"] = `Bearer ${token}`;
+        }
 
         return config;
     },

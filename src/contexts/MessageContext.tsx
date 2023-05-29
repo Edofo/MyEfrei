@@ -17,6 +17,7 @@ const MessageProvider = ({ children }: MessageProviderType) => {
         isShow: false,
         message: "",
         type: MessageType.NULL,
+        updatedAt: new Date(),
     });
 
     return <MessageContext.Provider value={{ popup, setPopup }}>{children}</MessageContext.Provider>;
@@ -30,11 +31,11 @@ const useMessageContext = () => {
     }
 
     const hideMessage = () => {
-        context.setPopup({ isShow: false, message: "", type: MessageType.NULL });
+        context.setPopup({ ...context.popup, isShow: false });
     };
 
     const showMessage = ({ message, type }: ShowPopup) => {
-        context.setPopup({ isShow: true, message, type });
+        context.setPopup({ isShow: true, message, type, updatedAt: new Date() });
     };
 
     return { message: context.popup, hideMessage, showMessage, MessageType };

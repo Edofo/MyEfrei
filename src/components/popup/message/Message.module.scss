@@ -10,12 +10,34 @@
     padding: 10px 20px;
     border-radius: 4px;
 
-    transition: transform 0.3s ease-in-out;
     transform: translateX(-110%);
-    will-change: transform;
+
+    border-left-width: 6px;
+    border-left-style: solid;
+
+    &.animated {
+        transition: transform 0.3s ease-in-out;
+        will-change: transform;
+    }
 
     &.show {
         transform: translateX(0);
+    }
+
+    &.error {
+        border-left-color: var(--color-red);
+    }
+
+    &.success {
+        border-left-color: var(--color-green);
+    }
+
+    &.info {
+        border-left-color: var(--color-blue);
+    }
+
+    &.warning {
+        border-left-color: var(--color-yellow);
     }
 
     i {

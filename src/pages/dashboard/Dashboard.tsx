@@ -6,18 +6,18 @@ import { Footer, Header, Navbar } from "@/components";
 
 const Dashboard = () => {
     return (
-        <>
+        <div className={styles.dashboard}>
             <div>
                 <Header />
                 <Navbar />
+
+                <main className={styles.main}>
+                    <Outlet />
+                </main>
             </div>
 
-            <main className={styles.main}>
-                <Outlet />
-            </main>
-
             <Footer />
-        </>
+        </div>
     );
 };
 

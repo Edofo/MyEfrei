@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import useRegister from "@/api/auth/Register";
 
@@ -19,7 +19,14 @@ const Login = () => {
         e?.preventDefault();
 
         // get all input values
-        const { name, email, password } = e?.target.elements;
+        const { name, email, password, confirmPassword } = e?.target.elements;
+
+        if (password.value !== confirmPassword.value) {
+            return showMessage({
+                type: MessageType.ERROR,
+                message: "Passwords do not match",
+            });
+        }
 
         const result = await mutation.mutateAsync({
             name: name.value,
@@ -34,9 +41,6 @@ const Login = () => {
             });
         }
 
-        // save token to cookies
-        // document.cookie = `token=${result.data.token}`;
-
         navigate(LOGIN);
     };
 
@@ -45,6 +49,7 @@ const Login = () => {
             <InputList.Classic
                 label="name"
                 inputOptions={{
+                    id: "name",
                     required: true,
                     type: "text",
                 }}
@@ -53,6 +58,7 @@ const Login = () => {
             <InputList.Classic
                 label="email"
                 inputOptions={{
+                    id: "email",
                     required: true,
                     type: "email",
                 }}
@@ -61,10 +67,30 @@ const Login = () => {
             <InputList.Classic
                 label="password"
                 inputOptions={{
+                    id: "password",
                     required: true,
                     type: "password",
                 }}
             />
+
+            <InputList.Classic
+                label="Confirm Password"
+                inputOptions={{
+                    id: "confirmPassword",
+                    required: true,
+                    type: "password",
+                }}
+            />
+
+            <div
+                style={{
+                    marginRight: "auto",
+                }}
+            >
+                <p>
+                    Already have an account? <Link to={LOGIN}>Login</Link>
+                </p>
+            </div>
 
             <ButtonList.Classic text="Register" buttonOptions={{ type: "submit" }} />
         </form>

@@ -1,15 +1,17 @@
-import ApiClient from "../../ApiClient";
+import ApiClient from "../ApiClient";
 
 import { useQuery } from "react-query";
 
-export const GetAllGrades = async () => {
+export const GetUserInfos = async () => {
     try {
         // fetch data (graphql) from api (students query)
         const { data } = await ApiClient.post("/graphql", {
             query: `
               query {
-                grades {
-                    id
+                userInfos {
+                    uuid
+                    name
+                    email
                 }
               }
             `,
@@ -22,9 +24,9 @@ export const GetAllGrades = async () => {
     }
 };
 
-const useGetAllGrades = () => {
-    return useQuery("students", GetAllGrades);
+const useGetUserInfos = () => {
+    return useQuery("userInfos", GetUserInfos);
 };
 
-export default GetAllGrades;
-export { useGetAllGrades };
+export default GetUserInfos;
+export { useGetUserInfos };

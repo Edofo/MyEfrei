@@ -15,8 +15,11 @@ const Register = async (data: RegisterInput) => {
                     password: "${data.password}"
                 }) {
                     uuid
-                    email
-                    name
+                    user {
+                        uuid
+                        name
+                        email
+                    }
                 }
               }
             `,
