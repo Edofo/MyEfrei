@@ -24,18 +24,26 @@ const Navbar = () => {
                     <Link to={Routes.HOME}>Accueil</Link>
                 </li>
                 <li className={isColor(Routes.STUDENT)}>
-                    <InputList.Dropdown value="Scolarité">
+                    <InputList.Dropdown className={styles.dropdownNav} value="Scolarité">
                         <Link to={Routes.GRADES}>
                             <i className="fad fa-clipboard-list" /> Consulter mes notes
+                        </Link>
+                        <Link to={Routes.CLASSROOM}>
+                            <i className="fad fa-clipboard-list" /> Consulter ma classe
                         </Link>
                     </InputList.Dropdown>
                 </li>
                 <li className={isColor(Routes.CAMPUS)}>
-                    <InputList.Dropdown value="Campus">
+                    <InputList.Dropdown className={styles.dropdownNav} value="Campus">
                         <Link to={Routes.PLANNING}>
                             <i className="fad fa-calendar-alt" /> Consulter mon planning
                         </Link>
                     </InputList.Dropdown>
+                </li>
+                <li>
+                    <a href="https://leets.app" target="__blank">
+                        Leets
+                    </a>
                 </li>
             </ul>
         </nav>

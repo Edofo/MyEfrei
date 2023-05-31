@@ -4,7 +4,7 @@ import styles from "./Dropdown.module.scss";
 
 import { DropdownProps } from "@/types/components/input/Dropdown";
 
-const Dropdown = ({ children, onChange, value }: DropdownProps) => {
+const Dropdown = ({ children, onChange, value, className }: DropdownProps) => {
     const [isShow, setIsShow] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -31,7 +31,7 @@ const Dropdown = ({ children, onChange, value }: DropdownProps) => {
     }, []);
 
     return (
-        <div className={styles.dropdown} ref={dropdownRef}>
+        <div className={`${styles.dropdown} ${className || ""}`} ref={dropdownRef}>
             <p className={styles.dropdownButton} onClick={handleShow}>
                 {value}
             </p>

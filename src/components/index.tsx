@@ -10,4 +10,6 @@ import ButtonList from "./buttons";
 
 import Footer from "./footer";
 
-export { Header, Navbar, Slider, Popup, InputList, ButtonList, Table, Footer };
+import ProtectedRoute from "./ProtectedRoute";
+
+export { Header, Navbar, Slider, Popup, InputList, ButtonList, Table, Footer, ProtectedRoute };

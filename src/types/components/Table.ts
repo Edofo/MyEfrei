@@ -5,5 +5,6 @@ export interface TableProps {
     options?: {
         pagination?: boolean;
         pageSize?: number;
+        headTextPostion: "left";
     };
 }

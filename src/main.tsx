@@ -9,6 +9,7 @@ import { PopupProvider } from "@/contexts/PopupContext";
 import { MessageProvider } from "@/contexts/MessageContext";
 
 import App from "./App";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -30,11 +31,13 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
-            <PopupProvider>
-                <MessageProvider>
-                    <App />
-                </MessageProvider>
-            </PopupProvider>
+            <AuthProvider>
+                <PopupProvider>
+                    <MessageProvider>
+                        <App />
+                    </MessageProvider>
+                </PopupProvider>
+            </AuthProvider>
         </QueryClientProvider>
-    </React.StrictMode>
+    </React.StrictMode>,
 );
