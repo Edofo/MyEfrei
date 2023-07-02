@@ -10,7 +10,7 @@ const Login = async (data: LoginInput) => {
             query: `
                 mutation {
                     login(email: "${data.email}", password: "${data.password}") {
-                    accessToken
+                        accessToken
                     }
                 }
             `,

@@ -11,6 +11,7 @@ export const GetUserInfos = async () => {
                     uuid
                     name
                     email
+                    role
                 }
               }
             `,

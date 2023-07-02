@@ -31,7 +31,7 @@ const GetAllGradesForStudent = async () => {
 };
 
 const useGetAllGradesForStudent = () => {
-    return useQuery("students", GetAllGradesForStudent);
+    return useQuery("gradesForStudent", GetAllGradesForStudent);
 };
 
 export default useGetAllGradesForStudent;

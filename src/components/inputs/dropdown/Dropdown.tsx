@@ -4,7 +4,7 @@ import styles from "./Dropdown.module.scss";
 
 import { DropdownProps } from "@/types/components/input/Dropdown";
 
-const Dropdown = ({ children, onChange, value, className }: DropdownProps) => {
+const Dropdown = ({ children, onChange, value, className, defaultButton }: DropdownProps) => {
     const [isShow, setIsShow] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -32,9 +32,17 @@ const Dropdown = ({ children, onChange, value, className }: DropdownProps) => {
 
     return (
         <div className={`${styles.dropdown} ${className || ""}`} ref={dropdownRef}>
-            <p className={styles.dropdownButton} onClick={handleShow}>
+            <button
+                className={defaultButton ? styles.dropdownButtonDefault : styles.dropdownButton}
+                onClick={handleShow}
+            >
                 {value}
-            </p>
+                {isShow ? (
+                    <i className="fas fa-chevron-up" style={{ marginLeft: "5px" }}></i>
+                ) : (
+                    <i className="fas fa-chevron-down" style={{ marginLeft: "5px" }}></i>
+                )}
+            </button>
             {isShow && (
                 <ul tabIndex={0} onBlur={handleHide}>
                     {children &&

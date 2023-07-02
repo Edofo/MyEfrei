@@ -7,9 +7,9 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import * as Routes from "@/constants/Routes";
 
 import Auth, { Login, Register } from "@/pages/auth";
-import Dashboard, { Home, Student } from "@/pages/dashboard";
+import Dashboard, { Home, Student, Teacher } from "@/pages/dashboard";
 
-import { Popup, ProtectedRoute } from "@/components";
+import { Popup, ProtectedRoute, TeacherRoute } from "@/components";
 import { useEffect } from "react";
 
 import { useGetUserInfos } from "./api/user/GetUserInfos";
@@ -31,18 +31,37 @@ const BrowserRouter = createBrowserRouter(
                     caseSensitive: true,
                 },
                 {
-                    path: Routes.GRADES,
+                    path: Routes.STUDENT_GRADES,
                     element: <Student.Grades />,
                     caseSensitive: true,
                 },
                 {
-                    path: Routes.CLASSROOM,
+                    path: Routes.STUDENT_CLASSROOM,
                     element: <Student.Classroom />,
                     caseSensitive: true,
                 },
                 {
                     path: Routes.PLANNING,
                     element: <Student.Planning />,
+                    caseSensitive: true,
+                },
+
+                {
+                    path: Routes.TEACHER_GRADES,
+                    element: (
+                        <TeacherRoute>
+                            <Teacher.Grades />
+                        </TeacherRoute>
+                    ),
+                    caseSensitive: true,
+                },
+                {
+                    path: Routes.TEACHER_CLASSROOM,
+                    element: (
+                        <TeacherRoute>
+                            <Teacher.Classroom />
+                        </TeacherRoute>
+                    ),
                     caseSensitive: true,
                 },
             ],
@@ -74,7 +93,7 @@ const BrowserRouter = createBrowserRouter(
 const App = () => {
     const { setAuth } = useAuthContext();
 
-    const { popup } = usePopupContext();
+    const { popup, hidePopup } = usePopupContext();
     const { message } = useMessageContext();
 
     const { data: userInfos, isLoading: userLoading } = useGetUserInfos();
@@ -83,7 +102,7 @@ const App = () => {
         if (!userLoading) {
             const user = userInfos?.data?.userInfos;
 
-            if (user !== null) {
+            if (user !== undefined && user !== null) {
                 setAuth({
                     isAuth: true,
                     token: "",
@@ -102,7 +121,7 @@ const App = () => {
     return (
         <>
             <RouterProvider router={BrowserRouter} />
-            {popup.isShow && <p>a</p>}
+            {popup.isShow && <Popup.Classic onClose={hidePopup}>{popup.children}</Popup.Classic>}
             {message.isShow && <Popup.Message />}
         </>
     );

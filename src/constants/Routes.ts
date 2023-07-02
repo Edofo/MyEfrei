@@ -2,8 +2,12 @@ export const HOME = "/portal";
 export const DASHBOARD = "/portal";
 
 export const STUDENT = DASHBOARD + "/student";
-export const GRADES = STUDENT + "/grades";
-export const CLASSROOM = STUDENT + "/classroom";
+export const STUDENT_GRADES = STUDENT + "/grades";
+export const STUDENT_CLASSROOM = STUDENT + "/classroom";
+
+export const TEACHER = DASHBOARD + "/teacher";
+export const TEACHER_GRADES = TEACHER + "/grades";
+export const TEACHER_CLASSROOM = TEACHER + "/classroom";
 
 export const CAMPUS = DASHBOARD + "/campus";
 export const PLANNING = CAMPUS + "/planning";

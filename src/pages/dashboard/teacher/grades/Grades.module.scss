@@ -1,0 +1,23 @@
+.grades {
+    .sub {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+
+    .table {
+        margin-top: 10px;
+
+        i {
+            font-size: 15px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    }
+}

@@ -9,10 +9,7 @@ const Table = ({ head, children, className, options }: TableProps) => {
                 <tr>
                     {head.map((item, index) => {
                         return (
-                            <th
-                                key={index + "head"}
-                                style={options?.headTextPostion === "left" ? { textAlign: "left" } : {}}
-                            >
+                            <th key={index + "head"} style={{ textAlign: options?.headTextPostion || "center" }}>
                                 {item}
                             </th>
                         );

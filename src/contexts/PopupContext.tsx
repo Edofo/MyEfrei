@@ -9,7 +9,7 @@ const PopupContext = createContext<PopupContextType | null>(null);
 const PopupProvider = ({ children }: PopupProviderType) => {
     const [popup, setPopup] = useState<Popup>({
         isShow: false,
-        children: null,
+        children: <></>,
     });
 
     return <PopupContext.Provider value={{ popup, setPopup }}>{children}</PopupContext.Provider>;
@@ -25,7 +25,7 @@ const usePopupContext = () => {
     const hidePopup = () => {
         context.setPopup({
             isShow: false,
-            children: null,
+            children: <></>,
         });
     };
 

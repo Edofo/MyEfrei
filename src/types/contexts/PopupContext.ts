@@ -9,5 +9,5 @@ export interface PopupProviderType {
 
 export interface Popup {
     isShow: boolean;
-    children: JSX.Element | null;
+    children: JSX.Element;
 }

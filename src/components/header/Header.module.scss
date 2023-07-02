@@ -20,6 +20,27 @@
             margin-left: 25px;
             gap: 10px;
 
+            div {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+
+                p,
+                span {
+                    line-height: 1rem;
+                }
+
+                span {
+                    position: absolute;
+                    top: 100%;
+                    background-color: var(--color-orange);
+                    border-radius: 7px;
+                    font-size: 12px;
+                    padding: 0 5px;
+                    margin-top: 2px;
+                }
+            }
+
             i {
                 background-color: var(--color-gray);
                 padding: 10px;

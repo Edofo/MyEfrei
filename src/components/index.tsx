@@ -11,5 +11,8 @@ import ButtonList from "./buttons";
 import Footer from "./footer";
 
 import ProtectedRoute from "./ProtectedRoute";
+import TeacherRoute from "./TeacherRoute";
 
-export { Header, Navbar, Slider, Popup, InputList, ButtonList, Table, Footer, ProtectedRoute };
+import Teacher from "./teacher";
+
+export { Header, Navbar, Slider, Popup, InputList, ButtonList, Table, Footer, Teacher, ProtectedRoute, TeacherRoute };

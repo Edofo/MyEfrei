@@ -3,4 +3,5 @@ export interface DropdownProps {
     value: String;
     onChange?: (item: JSX.Element, index: number) => void;
     className?: string;
+    defaultButton?: boolean;
 }

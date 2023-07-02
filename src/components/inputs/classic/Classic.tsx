@@ -1,6 +1,6 @@
 import styles from "./Classic.module.scss";
 
-const Classic = ({ label, inputOptions }: { inputOptions?: JSX.IntrinsicElements["input"]; label: string }) => {
+const Classic = ({ label, inputOptions }: { inputOptions?: JSX.IntrinsicElements["input"]; label?: string }) => {
     return (
         <div className={styles.input}>
             {label && (

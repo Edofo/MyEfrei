@@ -1,0 +1,25 @@
+.DeleteGrade {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+
+        .delete {
+            background-color: var(--color-red);
+            color: var(--color-white);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                background-color: var(--color-red-dark);
+            }
+        }
+    }
+}

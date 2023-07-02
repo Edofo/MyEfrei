@@ -31,7 +31,9 @@ const useAuthContext = () => {
         // if(user?.)
     };
 
-    return { checkAuth, isAuthenticate: auth.isAuth, setAuth };
+    const isTeacher: boolean = auth.user?.role === "TEACHER";
+
+    return { checkAuth, isAuthenticate: auth.isAuth, setAuth, isTeacher };
 };
 
 export { AuthProvider, useAuthContext };

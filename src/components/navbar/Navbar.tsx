@@ -6,7 +6,11 @@ import * as Routes from "@/constants/Routes";
 
 import { InputList } from "@/components";
 
+import { useAuthContext } from "@/contexts/AuthContext";
+
 const Navbar = () => {
+    const { isTeacher } = useAuthContext();
+
     const location = useLocation();
 
     const isColor = (path: string) => {
@@ -23,18 +27,31 @@ const Navbar = () => {
                 <li className={isColor(Routes.HOME)}>
                     <Link to={Routes.HOME}>Accueil</Link>
                 </li>
-                <li className={isColor(Routes.STUDENT)}>
-                    <InputList.Dropdown className={styles.dropdownNav} value="Scolarité">
-                        <Link to={Routes.GRADES}>
-                            <i className="fad fa-clipboard-list" /> Consulter mes notes
-                        </Link>
-                        <Link to={Routes.CLASSROOM}>
-                            <i className="fad fa-clipboard-list" /> Consulter ma classe
-                        </Link>
-                    </InputList.Dropdown>
-                </li>
+                {isTeacher ? (
+                    <li className={isColor(Routes.TEACHER)}>
+                        <InputList.Dropdown defaultButton className={styles.dropdownNav} value="Scolarité">
+                            <Link to={Routes.TEACHER_GRADES}>
+                                <i className="fad fa-clipboard-list" /> Consulter mes notes
+                            </Link>
+                            <Link to={Routes.TEACHER_CLASSROOM}>
+                                <i className="fad fa-clipboard-list" /> Consulter mes classes
+                            </Link>
+                        </InputList.Dropdown>
+                    </li>
+                ) : (
+                    <li className={isColor(Routes.STUDENT)}>
+                        <InputList.Dropdown defaultButton className={styles.dropdownNav} value="Scolarité">
+                            <Link to={Routes.STUDENT_GRADES}>
+                                <i className="fad fa-clipboard-list" /> Consulter mes notes
+                            </Link>
+                            <Link to={Routes.STUDENT_CLASSROOM}>
+                                <i className="fad fa-clipboard-list" /> Consulter ma classe
+                            </Link>
+                        </InputList.Dropdown>
+                    </li>
+                )}
                 <li className={isColor(Routes.CAMPUS)}>
-                    <InputList.Dropdown className={styles.dropdownNav} value="Campus">
+                    <InputList.Dropdown defaultButton className={styles.dropdownNav} value="Campus">
                         <Link to={Routes.PLANNING}>
                             <i className="fad fa-calendar-alt" /> Consulter mon planning
                         </Link>

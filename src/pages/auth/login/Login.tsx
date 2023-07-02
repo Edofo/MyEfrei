@@ -7,6 +7,7 @@ import { ButtonList, InputList } from "@/components";
 import useLogin from "@/api/auth/Login";
 
 import { useMessageContext } from "@/contexts/MessageContext";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 import { DASHBOARD, REGISTER } from "@/constants/Routes";
 
@@ -14,13 +15,13 @@ const Login = () => {
     const mutation = useLogin();
 
     const { showMessage, MessageType } = useMessageContext();
+    const { setAuth } = useAuthContext();
 
     const navigate = useNavigate();
 
     const onSubmit = async (e: any) => {
         e?.preventDefault();
 
-        // get all input values
         const { email, password } = e?.target?.elements;
 
         const result = await mutation.mutateAsync({
@@ -37,8 +38,14 @@ const Login = () => {
 
         // save token to cookies with expiry date
         document.cookie = `${import.meta.env.VITE_COOKIE_NAME}=${result.data?.login?.accessToken}; expires=${new Date(
-            result.data.expiresAt
+            result.data.expiresAt,
         ).toUTCString()}; path=/`;
+
+        setAuth({
+            isAuth: true,
+            token: result.data?.login?.accessToken,
+            user: result.data?.login?.user,
+        });
 
         navigate(DASHBOARD);
     };

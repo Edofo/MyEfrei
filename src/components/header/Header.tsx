@@ -1,9 +1,14 @@
+import { useState } from "react";
 import styles from "./Header.module.scss";
 
 import { useGetUserInfos } from "@/api/user/GetUserInfos";
+import { InputList } from "..";
 
 const Header = () => {
     const { data: userInfos } = useGetUserInfos();
+    const user = userInfos?.data?.userInfos;
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
     return (
         <header className={styles.header}>
@@ -15,8 +20,17 @@ const Header = () => {
             <div>
                 <i className="fas fa-bell" />
                 <div className={styles.account}>
-                    <p>{userInfos?.data?.userInfos?.name}</p>
-                    <i className="fas fa-user" />
+                    <div>
+                        <p>{user?.name}</p>
+                        <span>{user?.role === "STUDENT" ? "Etudiant" : "Intervenant"}</span>
+                    </div>
+                    <i className="fas fa-user" onClick={() => setIsDropdownOpen(!isDropdownOpen)} />
+                    {isDropdownOpen && (
+                        <InputList.Dropdown value={user?.name} onChange={() => {}}>
+                            <p>Mon compte</p>
+                            <p>Se déconnecter</p>
+                        </InputList.Dropdown>
+                    )}
                 </div>
             </div>
         </header>

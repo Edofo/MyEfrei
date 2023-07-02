@@ -1,0 +1,44 @@
+.popupClassic {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.429);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .subPopup {
+        position: relative;
+
+        padding: 15px;
+        border-radius: 8px;
+
+        max-width: 90vw;
+
+        background-color: var(--color-white);
+
+        .close {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+            transition-duration: 0.3s;
+
+            &:hover {
+                color: var(--color-red);
+            }
+        }
+    }
+}
