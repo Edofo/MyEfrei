@@ -2,12 +2,29 @@ import { useState } from "react";
 
 import styles from "./EditGrade.module.scss";
 
+import { useMessageContext } from "@/contexts/MessageContext";
+
 import { ButtonList, InputList } from "@/components";
 
-const EditGrade = () => {
+import useUpdateGrade from "@/api/teacher/grades/UpdateGrade";
+
+const EditGrade = ({ grade_uuid }: { grade_uuid: string }) => {
+    const { showMessage, MessageType } = useMessageContext();
+    const { mutateAsync: editGrade } = useUpdateGrade();
+
     const [selectedGrade, setSelectedGrade] = useState("");
 
-    const handleSubmit = () => {};
+    const handleSubmit = async () => {
+        const result = await editGrade({ grade_uuid, value: selectedGrade });
+
+        if (result?.success) {
+            showMessage({ message: "La note a bien été modifiée", type: MessageType.SUCCESS });
+        } else {
+            showMessage({ message: "Une erreur est survenue", type: MessageType.ERROR });
+        }
+
+        // window.location.reload();
+    };
 
     return (
         <div className={styles.EditGrade}>

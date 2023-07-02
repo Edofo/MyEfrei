@@ -5,26 +5,22 @@ import styles from "./Grades.module.scss";
 import { ButtonList, InputList, Table, Teacher } from "@/components";
 
 import useGetAllGradesForTeacher from "@/api/teacher/grades/GetAllGradesForTeacher";
-import useGetAllSubjectsForTeacher from "@/api/teacher/subject/GetAllSubjectsForTeacher";
+import useGetClassesForTeacher from "@/api/teacher/class/GetClassesForTeacher";
 
 import { usePopupContext } from "@/contexts/PopupContext";
 
 const Grades = () => {
     const { showPopup } = usePopupContext();
 
+    const { data: classrooms } = useGetClassesForTeacher();
     const { data: grades } = useGetAllGradesForTeacher();
-    const { data: subjects } = useGetAllSubjectsForTeacher();
 
     const dataGrades = grades?.data?.gradesForTeacher;
-    const dataSubjects = subjects?.data?.subjectsForTeacher;
+    const dataClassroom = classrooms?.data?.classesForTeacher;
 
     const [selectedClass, setSelectedClass] = useState<string>("Tous");
 
-    const classes = dataGrades
-        ?.sort((a: any, b: any) => a?.class > b?.class)
-        .map((grade: any) => {
-            return grade?.class;
-        });
+    const classes = dataClassroom?.sort((a, b) => a?.name > b?.name)?.map((x: any) => x?.name);
     classes?.unshift("Tous");
 
     const displayPopupAddGrade = () => {
@@ -50,15 +46,15 @@ const Grades = () => {
             }
         });
 
-        showPopup(<Teacher.Grades.AddGrade classes={tab} subjects={dataSubjects} />);
+        showPopup(<Teacher.Grades.AddGrade />);
     };
 
-    const displayPopupEditGrade = () => {
-        showPopup(<Teacher.Grades.EditGrade />);
+    const displayPopupEditGrade = (grade_uuid: string) => {
+        showPopup(<Teacher.Grades.EditGrade grade_uuid={grade_uuid} />);
     };
 
-    const displayPopupDeleteGrade = () => {
-        showPopup(<Teacher.Grades.DeleteGrade />);
+    const displayPopupDeleteGrade = (grade_uuid: string) => {
+        showPopup(<Teacher.Grades.DeleteGrade grade_uuid={grade_uuid} />);
     };
 
     return (
@@ -115,8 +111,14 @@ const Grades = () => {
                                         <td>{x?.grade?.coef}</td>
                                         <td>{x?.grade?.value}</td>
                                         <td>
-                                            <i className="fas fa-edit" onClick={() => displayPopupEditGrade()} />
-                                            <i className="fas fa-trash" onClick={() => displayPopupDeleteGrade()} />
+                                            <i
+                                                className="fas fa-edit"
+                                                onClick={() => displayPopupEditGrade(x?.grade?.uuid)}
+                                            />
+                                            <i
+                                                className="fas fa-trash"
+                                                onClick={() => displayPopupDeleteGrade(x?.grade?.uuid)}
+                                            />
                                         </td>
                                     </tr>
                                 );

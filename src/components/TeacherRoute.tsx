@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { DASHBOARD, LOGIN } from "@/constants/Routes";
+import { LOGIN } from "@/constants/Routes";
 
 import { ProtectedRouteProps } from "@/types/components/ProtectedRoute";
 
@@ -16,8 +16,6 @@ const TeacherRoute = ({ children }: ProtectedRouteProps) => {
         if (isTeacher === false) {
             if (isAuthenticate === false) {
                 navigate(LOGIN, { replace: true });
-            } else {
-                navigate(DASHBOARD, { replace: true });
             }
         }
     }, [isTeacher]);

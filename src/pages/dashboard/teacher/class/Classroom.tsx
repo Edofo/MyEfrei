@@ -3,6 +3,7 @@ import styles from "./Class.module.scss";
 import useGetClassesForTeacher from "@/api/teacher/class/GetClassesForTeacher";
 
 import { Table } from "@/components";
+
 import { usePopupContext } from "@/contexts/PopupContext";
 
 const Classroom = () => {
@@ -25,9 +26,9 @@ const Classroom = () => {
                 >
                     {data?.students?.map((data: any, index: number) => {
                         return (
-                            <tr key={data?.user?.name + `${index}`}>
-                                <td>{data?.user?.name}</td>
-                                <td>{data?.user?.email}</td>
+                            <tr key={data?.name + `${index}`}>
+                                <td>{data?.name}</td>
+                                <td>{data?.email}</td>
                             </tr>
                         );
                     })}

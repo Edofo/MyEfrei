@@ -4,14 +4,45 @@ import styles from "./AddGrade.module.scss";
 
 import { ButtonList, InputList } from "@/components";
 
-const AddGrade = ({ classes, subjects }: any) => {
+import { useMessageContext } from "@/contexts/MessageContext";
+
+import useGetClassesForTeacher from "@/api/teacher/class/GetClassesForTeacher";
+import useGetAllSubjectsForTeacher from "@/api/teacher/subject/GetAllSubjectsForTeacher";
+import useAddGrade from "@/api/teacher/grades/AddGrade";
+
+const AddGrade = () => {
+    const { showMessage, MessageType } = useMessageContext();
+
+    const { mutateAsync: addGrade } = useAddGrade();
+
+    const { data: classrooms } = useGetClassesForTeacher();
+    const { data: subjects } = useGetAllSubjectsForTeacher();
+
+    const dataClassroom = classrooms?.data?.classesForTeacher;
+    const dataSubjects = subjects?.data?.subjectsForTeacher;
+
     const [selectedClass, setSelectedClass] = useState("");
-    const [selectedSubject, setSelectedSubject] = useState("");
-    const [selectedStudent, setSelectedStudent] = useState("");
+    const [selectedSubject, setSelectedSubject] = useState({ uuid: "", name: "" });
+    const [selectedStudent, setSelectedStudent] = useState({ uuid: "", name: "" });
     const [selectedCoef, setSelectedCoef] = useState("");
     const [selectedGrade, setSelectedGrade] = useState("");
 
-    const handleSubmit = () => {};
+    const handleSubmit = async () => {
+        const result = await addGrade({
+            student_uuid: selectedStudent.uuid,
+            subject_uuid: selectedSubject.uuid,
+            value: selectedGrade,
+            coef: selectedCoef,
+        });
+
+        if (result?.success) {
+            showMessage({ message: "La note a bien été ajoutée", type: MessageType.SUCCESS });
+        } else {
+            showMessage({ message: "Une erreur est survenue", type: MessageType.ERROR });
+        }
+
+        // window.location.reload();
+    };
 
     return (
         <div className={styles.AddGrade}>
@@ -20,8 +51,8 @@ const AddGrade = ({ classes, subjects }: any) => {
             <div>
                 <p>Sélectionne la classe :</p>
                 <InputList.Dropdown value={selectedClass} onChange={e => setSelectedClass(e.props?.children)}>
-                    {classes?.map((classe: any) => {
-                        return <p key={classe?.classe}>{classe?.classe}</p>;
+                    {dataClassroom?.map((classe: any) => {
+                        return <p key={classe?.name}>{classe?.name}</p>;
                     })}
                 </InputList.Dropdown>
             </div>
@@ -29,28 +60,42 @@ const AddGrade = ({ classes, subjects }: any) => {
             {selectedClass !== "" && (
                 <div>
                     <p>Sélectionne le sujet :</p>
-                    <InputList.Dropdown value={selectedSubject} onChange={e => setSelectedSubject(e.props?.children)}>
-                        {subjects?.map((subject: any) => {
-                            return <p key={subject?.name}>{subject?.name}</p>;
+                    <InputList.Dropdown value={selectedSubject?.name}>
+                        {dataSubjects?.map((subject: any) => {
+                            return (
+                                <p
+                                    key={subject?.name}
+                                    onClick={() => setSelectedSubject({ uuid: subject?.uuid, name: subject?.name })}
+                                >
+                                    {subject?.name}
+                                </p>
+                            );
                         })}
                     </InputList.Dropdown>
                 </div>
             )}
 
-            {selectedSubject !== "" && (
+            {selectedSubject.uuid !== "" && (
                 <div>
                     <p>Sélectionne l'élève :</p>
-                    <InputList.Dropdown value={selectedStudent} onChange={e => setSelectedStudent(e.props?.children)}>
-                        {classes
-                            ?.find((classe: any) => classe?.classe === selectedClass)
+                    <InputList.Dropdown value={selectedStudent?.name}>
+                        {dataClassroom
+                            ?.find((classe: any) => classe?.name === selectedClass)
                             ?.students?.map((student: any) => {
-                                return <p key={student?.name}>{student?.name}</p>;
+                                return (
+                                    <p
+                                        key={student?.name}
+                                        onClick={() => setSelectedStudent({ uuid: student?.uuid, name: student?.name })}
+                                    >
+                                        {student?.name}
+                                    </p>
+                                );
                             })}
                     </InputList.Dropdown>
                 </div>
             )}
 
-            {selectedStudent !== "" && (
+            {selectedStudent.uuid !== "" && (
                 <div>
                     <p>Sélectionne le coefficient :</p>
                     <InputList.Classic

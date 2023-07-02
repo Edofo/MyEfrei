@@ -10,6 +10,7 @@ import { MessageProvider } from "@/contexts/MessageContext";
 
 import App from "./App";
 import { AuthProvider } from "./contexts/AuthContext";
+import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -34,7 +35,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <AuthProvider>
                 <PopupProvider>
                     <MessageProvider>
-                        <App />
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
                     </MessageProvider>
                 </PopupProvider>
             </AuthProvider>

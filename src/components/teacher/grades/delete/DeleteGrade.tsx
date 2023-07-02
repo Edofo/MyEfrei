@@ -1,12 +1,29 @@
-import { usePopupContext } from "@/contexts/PopupContext";
 import styles from "./DeleteGrade.module.scss";
+
+import { usePopupContext } from "@/contexts/PopupContext";
+import { useMessageContext } from "@/contexts/MessageContext";
 
 import { ButtonList } from "@/components";
 
-const DeleteGrade = () => {
+import useDeleteGrade from "@/api/teacher/grades/DeleteGrade";
+
+const DeleteGrade = ({ grade_uuid }: { grade_uuid: string }) => {
+    const { showMessage, MessageType } = useMessageContext();
     const { hidePopup } = usePopupContext();
 
-    const handleSubmit = () => {};
+    const { mutateAsync: deleteGrade } = useDeleteGrade();
+
+    const handleSubmit = async () => {
+        const result = await deleteGrade({ grade_uuid });
+
+        if (result?.success) {
+            showMessage({ message: "La note a bien été supprimée", type: MessageType.SUCCESS });
+        } else {
+            showMessage({ message: "Une erreur est survenue", type: MessageType.ERROR });
+        }
+
+        // window.location.reload();
+    };
 
     return (
         <div className={styles.DeleteGrade}>
