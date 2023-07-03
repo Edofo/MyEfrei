@@ -17,7 +17,6 @@ const Header = () => {
     const handleLogout = () => {
         logout();
 
-        // redirect to login page
         window.location.href = LOGIN;
     };
 

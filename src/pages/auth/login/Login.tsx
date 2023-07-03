@@ -10,6 +10,7 @@ import { useMessageContext } from "@/contexts/MessageContext";
 import { useAuthContext } from "@/contexts/AuthContext";
 
 import { DASHBOARD, REGISTER } from "@/constants/Routes";
+import GetUserInfos from "@/api/user/GetUserInfos";
 
 const Login = () => {
     const mutation = useLogin();
@@ -41,10 +42,12 @@ const Login = () => {
             result.data.expiresAt,
         ).toUTCString()}; path=/`;
 
+        const userInfos = await GetUserInfos();
+
         setAuth({
             isAuth: true,
             token: result.data?.login?.accessToken,
-            user: result.data?.login?.user,
+            user: userInfos.data?.userInfos,
         });
 
         navigate(DASHBOARD);
