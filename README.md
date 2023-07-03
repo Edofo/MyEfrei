@@ -38,7 +38,6 @@ Password: teacher
 
 Email: student@a.a
 Password: student
-Folder Structure
 
 ## Credits
 
