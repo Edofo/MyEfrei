@@ -20,7 +20,9 @@ const Grades = () => {
 
     const [selectedClass, setSelectedClass] = useState<string>("Tous");
 
-    const classes = dataClassroom?.sort((a, b) => a?.name > b?.name)?.map((x: any) => x?.name);
+    const classes = dataClassroom
+        ?.sort((a: { name: number }, b: { name: number }) => a?.name > b?.name)
+        ?.map((x: any) => x?.name);
     classes?.unshift("Tous");
 
     const displayPopupAddGrade = () => {

@@ -2,13 +2,24 @@ import { useState } from "react";
 import styles from "./Header.module.scss";
 
 import { useGetUserInfos } from "@/api/user/GetUserInfos";
-import { InputList } from "..";
+import { useAuthContext } from "@/contexts/AuthContext";
+
+import { LOGIN } from "@/constants/Routes";
 
 const Header = () => {
+    const { logout } = useAuthContext();
+
     const { data: userInfos } = useGetUserInfos();
     const user = userInfos?.data?.userInfos;
 
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+
+    const handleLogout = () => {
+        logout();
+
+        // redirect to login page
+        window.location.href = LOGIN;
+    };
 
     return (
         <header className={styles.header}>
@@ -24,13 +35,16 @@ const Header = () => {
                         <p>{user?.name}</p>
                         <span>{user?.role === "STUDENT" ? "Etudiant" : "Intervenant"}</span>
                     </div>
-                    <i className="fas fa-user" onClick={() => setIsDropdownOpen(!isDropdownOpen)} />
-                    {isDropdownOpen && (
-                        <InputList.Dropdown value={user?.name} onChange={() => {}}>
-                            <p>Mon compte</p>
-                            <p>Se déconnecter</p>
-                        </InputList.Dropdown>
-                    )}
+                    <div className={styles.avatar}>
+                        <i className="fas fa-user" onClick={() => setIsDropdownOpen(!isDropdownOpen)} />
+                        {isDropdownOpen && (
+                            <ul className={styles?.dropdown}>
+                                <li>
+                                    <p onClick={handleLogout}>Se déconnecter</p>
+                                </li>
+                            </ul>
+                        )}
+                    </div>
                 </div>
             </div>
         </header>

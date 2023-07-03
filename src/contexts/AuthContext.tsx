@@ -31,9 +31,16 @@ const useAuthContext = () => {
         // if(user?.)
     };
 
+    const logout = () => {
+        // remove token from cookies
+        document.cookie = `${import.meta.env.VITE_COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+
+        setAuth({ isAuth: false, token: "", user: null });
+    };
+
     const isTeacher: boolean = auth.user?.role === "TEACHER";
 
-    return { checkAuth, isAuthenticate: auth.isAuth, setAuth, isTeacher };
+    return { checkAuth, isAuthenticate: auth.isAuth, setAuth, isTeacher, logout };
 };
 
 export { AuthProvider, useAuthContext };

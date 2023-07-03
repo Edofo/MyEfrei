@@ -12,10 +12,8 @@ const GetClassForStudent = async () => {
                     createdAt
                     updatedAt
                     students {
-                        user {
-                            name
-                            email
-                        }
+                        name
+                        email
                     }
                 }
               }

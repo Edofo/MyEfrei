@@ -7,9 +7,8 @@ const GetClassesForTeacher = async () => {
             query: `
               query {
                 classesForTeacher {
+                    uuid
                     name
-                    createdAt
-                    updatedAt
                     students {
                         uuid
                         name

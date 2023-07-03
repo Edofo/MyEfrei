@@ -41,11 +41,49 @@
                 }
             }
 
-            i {
-                background-color: var(--color-gray);
-                padding: 10px;
-                border-radius: 50%;
-                cursor: pointer;
+            .avatar {
+                position: relative;
+
+                i {
+                    background-color: var(--color-gray);
+                    padding: 10px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 7px;
+                    background-color: #fff;
+                    border-radius: 4px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    z-index: 2;
+                    padding: 10px 5px;
+                    min-width: -webkit-fill-available;
+                    width: -webkit-max-content;
+                    width: -moz-max-content;
+                    width: max-content;
+
+                    li {
+                        cursor: pointer;
+                        font-size: 16px;
+
+                        p {
+                            color: var(--color-black);
+                        }
+
+                        &:hover {
+                            background-color: #eee;
+                        }
+                    }
+                }
             }
         }
     }

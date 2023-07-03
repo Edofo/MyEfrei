@@ -23,9 +23,9 @@ const Classroom = () => {
             >
                 {dataClassroom?.students?.map((student: any, index: number) => {
                     return (
-                        <tr key={student?.user?.email + `${index}`}>
-                            <td>{student?.user?.name}</td>
-                            <td>{student?.user?.email}</td>
+                        <tr key={student?.email + `${index}`}>
+                            <td>{student?.name}</td>
+                            <td>{student?.email}</td>
                         </tr>
                     );
                 })}
